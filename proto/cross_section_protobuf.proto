@@ -1,0 +1,47 @@
+syntax = "proto3";
+package material_protobuf;
+
+message Library {
+  string library_name = 1;
+  uint32 number_of_groups = 2;
+  repeated float energy_groups = 3 [packed = true];
+  repeated Material materials = 4;
+  
+  message Material {
+    string full_name = 1;
+    string abbreviation = 2;
+    uint32 A = 3;
+    uint32 Z = 4;
+
+    enum Scalar_Keys {
+      UNKNOWN_SCALAR = 0;
+      DENSITY = 1;
+    }
+
+    enum Vector_Keys {
+      UNKNOWN_VECTOR = 0;
+      SIGMA_T = 1;
+      CHI = 2;
+    }
+
+    enum Matrix_Keys {
+      UNKNOWN_MATRIX = 0;
+      SIGMA_S = 1;
+    }
+
+    map<uint32, float> scalar_properties = 5;
+    map<uint32, Vector> vector_properties = 6;
+    map<uint32, Matrix> matrix_properties = 7;
+
+    message Vector {
+      repeated double values = 1 [packed=true];
+    }
+
+    message Matrix {
+      uint32 rows = 1;
+      uint32 cols = 2;
+      repeated double values = 3 [packed=true];
+    }
+  }
+}
+      
