@@ -6,41 +6,48 @@ message Library {
   uint32 number_of_groups = 2;
   repeated float energy_groups = 3 [packed = true];
   repeated Material materials = 4;
+
+  enum ScalarId {
+    UNKNOWN_SCALAR = 0;
+    DENSITY = 1;
+  }
   
+  enum VectorId {
+    UNKNOWN_VECTOR = 0;
+    SIGMA_T = 1;
+    CHI = 2;
+  }
+
+  enum MatrixId {
+    UNKNOWN_MATRIX = 0;
+    SIGMA_S = 1;
+  }
+
   message Material {
     string full_name = 1;
     string abbreviation = 2;
     uint32 A = 3;
     uint32 Z = 4;
 
-    enum Scalar_Keys {
-      UNKNOWN_SCALAR = 0;
-      DENSITY = 1;
+    repeated ScalarProperty scalar_property = 5;
+    repeated VectorProperty vector_property = 6;
+    repeated MatrixProperty matrix_property = 7;
+
+    message ScalarProperty {
+      ScalarId id = 1;
+      float value = 2;
+    }
+    
+    message VectorProperty {
+      VectorId id = 1;
+      repeated double value = 2 [packed=true];
     }
 
-    enum Vector_Keys {
-      UNKNOWN_VECTOR = 0;
-      SIGMA_T = 1;
-      CHI = 2;
-    }
-
-    enum Matrix_Keys {
-      UNKNOWN_MATRIX = 0;
-      SIGMA_S = 1;
-    }
-
-    map<uint32, float> scalar_properties = 5;
-    map<uint32, Vector> vector_properties = 6;
-    map<uint32, Matrix> matrix_properties = 7;
-
-    message Vector {
-      repeated double values = 1 [packed=true];
-    }
-
-    message Matrix {
-      uint32 rows = 1;
-      uint32 cols = 2;
-      repeated double values = 3 [packed=true];
+    message MatrixProperty {
+      MatrixId id = 1;
+      uint32 rows = 2;
+      uint32 cols = 3;
+      repeated double value = 4 [packed=true];
     }
   }
 }
