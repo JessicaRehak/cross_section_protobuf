@@ -4,8 +4,9 @@ package material_protobuf;
 message Library {
   string library_name = 1;
   uint32 number_of_groups = 2;
-  repeated float energy_groups = 3 [packed = true];
-  repeated Material materials = 4;
+  uint32 thermal_groups = 3;
+  repeated float energy_groups = 4 [packed = true];
+  repeated Material materials = 5;
 
   enum ScalarId {
     UNKNOWN_SCALAR = 0;
@@ -14,8 +15,11 @@ message Library {
   
   enum VectorId {
     UNKNOWN_VECTOR = 0;
-    SIGMA_T = 1;
-    CHI = 2;
+    CHI = 1;
+    SIGMA_T = 2;
+    SIGMA_A = 3;
+    NU_SIG_F = 4;
+    KAPPA_SIG_F = 5;
   }
 
   enum MatrixId {
@@ -26,12 +30,11 @@ message Library {
   message Material {
     string full_name = 1;
     string abbreviation = 2;
-    uint32 A = 3;
-    uint32 Z = 4;
-
-    repeated ScalarProperty scalar_property = 5;
-    repeated VectorProperty vector_property = 6;
-    repeated MatrixProperty matrix_property = 7;
+    string id = 3;
+    
+    repeated ScalarProperty scalar_property = 7;
+    repeated VectorProperty vector_property = 8;
+    repeated MatrixProperty matrix_property = 9;
 
     message ScalarProperty {
       ScalarId id = 1;
