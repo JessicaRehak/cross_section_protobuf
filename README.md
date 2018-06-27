@@ -4,7 +4,7 @@ Google protocol buffers.
 
 - `proto`: `.proto` files
 - `python`: python scripts for converting `.xml` material data files
-  into the protocl buffer format (PLANNED)
+  into the protocol buffer format
 - `lib`: library of cross-section data divided by benchmark and
   format.
   
