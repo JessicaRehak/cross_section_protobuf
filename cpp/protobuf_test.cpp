@@ -5,13 +5,13 @@
 #include <map>
 #include "material.pb.h"
 
-int main()
+int main(int argc, char* argv[])
 {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 	Material material;
 
-	std::ifstream inputFileStream("../lib/kaist/serialized/ba.material", std::ios::binary);
+	std::ifstream inputFileStream(argv[1], std::ios::binary);
 
 	if (!material.ParseFromIstream(&inputFileStream)) {
 		std::cout << "failed to parse\n";

@@ -54,10 +54,11 @@ def XML_To_Material(inputFilename):
 
 	vector_properties = []
 	for key, value in key_map.items():
-	    vector_prop = mat_proto.Material.VectorProperty()
-	    vector_prop.id = value
-	    vector_prop.value.extend(data[key])
-	    vector_properties.append(vector_prop)
+		if key in data:
+		    vector_prop = mat_proto.Material.VectorProperty()
+		    vector_prop.id = value
+		    vector_prop.value.extend(data[key])
+		    vector_properties.append(vector_prop)
 
 	material.vector_property.extend(vector_properties)
 
