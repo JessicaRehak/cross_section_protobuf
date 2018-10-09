@@ -25,6 +25,7 @@ message Material {
     SIGMA_A = 4;
     NU_SIG_F = 5;
     KAPPA_SIG_F = 6;
+    Q = 7;
   }
 
   enum MatrixId {
@@ -35,7 +36,7 @@ message Material {
 
   message ScalarProperty {
     ScalarId id = 1;
-    float value = 2;
+    double value = 2;
   }
   
   message VectorProperty {
