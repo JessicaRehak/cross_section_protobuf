@@ -26,6 +26,7 @@ message Material {
     NU_SIG_F = 5;
     KAPPA_SIG_F = 6;
     Q = 7;
+    DIFFUSION_COEFF = 8;
   }
 
   enum MatrixId {
